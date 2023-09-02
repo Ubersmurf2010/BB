@@ -39,8 +39,6 @@ const storage = multer.diskStorage({
   },
 });
 
-
-
 const upload = multer({ storage });
 
 app.use(express.json());
@@ -51,7 +49,7 @@ app.use(
   cors({
     origin: ["https://ubersmurf-notes.vercel.app"],
     methods: ["POST", "GET"],
-    Credential: true,
+    credential: true,
   })
 );
 
