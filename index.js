@@ -43,13 +43,7 @@ app.use(express.json());
 //делаешь гет запрос на получение статичного файла
 app.use("/uploads", express.static("uploads"));
 
-app.use(
-  cors({
-    origin: ["https://ubersmurf-note.vercel.app"],
-    methods: ["POST", "GET"],
-    credential: true,
-  })
-);
+app.use(cors());
 
 app.post("/upload", checkAuth, upload.single("image"), (req, res) => {
   res.json({
