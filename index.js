@@ -39,6 +39,8 @@ const storage = multer.diskStorage({
   },
 });
 
+
+
 const upload = multer({ storage });
 
 app.use(express.json());
@@ -73,7 +75,8 @@ app.post(
   userController.login
 );
 app.get("/auth/me", checkAuth, userController.getMe);
-
+app.get("/", (req, res) => {
+  res.json("Hello"));
 //posts apps
 app.post("/posts", checkAuth, postCreateValidator, postController.create);
 app.delete("/posts/:id", checkAuth, postController.remove);
