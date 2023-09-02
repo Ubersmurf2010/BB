@@ -72,9 +72,12 @@ app.post(
   validationsErrors,
   userController.login
 );
-app.get("/auth/me", checkAuth, userController.getMe);
+app.get("/auth/me", checkAuth, userController.getMe); 
+
 app.get("/", (req, res) => {
-  res.json("Hello"));
+  res.json("Hello");
+});
+  
 //posts apps
 app.post("/posts", checkAuth, postCreateValidator, postController.create);
 app.delete("/posts/:id", checkAuth, postController.remove);
