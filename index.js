@@ -47,7 +47,7 @@ app.use("/uploads", express.static("uploads"));
 
 app.use(
   cors({
-    origin: ["https://ubersmurf-notes.vercel.app"],
+    origin: ["https://ubersmurf-note.vercel.app"],
     methods: ["POST", "GET"],
     credential: true,
   })
