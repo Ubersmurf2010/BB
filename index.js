@@ -1,6 +1,5 @@
-//https://www.youtube.com/watch?v=GQ_pTmcXNrQ&t=480s
-
 import express from "express";
+import fs from "fs";
 import mongoose from "mongoose";
 import {
   registerValidator,
@@ -22,15 +21,22 @@ mongoose
   .then(() => console.log("DB OK"))
   .catch((err) => console.log("DB error", err));
 
-// создаем экспрес приложение
 const app = express();
 
 //make a vault for documents
-
 const storage = multer.diskStorage({
   destination: (_, __, cb) => {
+    if (!fs.existsSync("uploads")) {
+      fs.mkdirSync("uploads");
+    }
     cb(null, "uploads");
   },
+
+  filename: (_, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
+
 
   filename: (_, file, cb) => {
     cb(null, file.originalname);
