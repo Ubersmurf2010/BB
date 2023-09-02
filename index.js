@@ -43,12 +43,7 @@ app.use(express.json());
 //делаешь гет запрос на получение статичного файла
 app.use("/uploads", express.static("uploads"));
 
-app.use(cors(
-  {
-    origin: ["https://ubersmurf-notes.vercel.app"],
-    credentials: true
-  }
-));
+app.use(cors());
 
 app.post("/upload", checkAuth, upload.single("image"), (req, res) => {
   res.json({
@@ -98,7 +93,7 @@ app.patch("/cards/:id", checkAuth, cardController.update);
 app.get("/cards/", cardController.getAll);
 app.get("/cards/:id", cardController.getOne);
 
-app.listen(4444, (err) => {
+app.listen(80, (err) => {
   if (err) {
     return console.log(err);
   }
