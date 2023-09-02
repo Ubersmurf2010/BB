@@ -31,17 +31,11 @@ const storage = multer.diskStorage({
     }
     cb(null, "uploads");
   },
-
   filename: (_, file, cb) => {
     cb(null, file.originalname);
   },
 });
 
-
-  filename: (_, file, cb) => {
-    cb(null, file.originalname);
-  },
-});
 
 const upload = multer({ storage });
 
