@@ -22,7 +22,7 @@ mongoose
   .catch((err) => console.log("DB error", err));
 
 const app = express();
-
+app.use(cors());
 //make a vault for documents
 const storage = multer.diskStorage({
   destination: (_, __, cb) => {
@@ -42,8 +42,6 @@ const upload = multer({ storage });
 app.use(express.json());
 //делаешь гет запрос на получение статичного файла
 app.use("/uploads", express.static("uploads"));
-
-app.use(cors());
 
 app.post("/upload", checkAuth, upload.single("image"), (req, res) => {
   res.json({
