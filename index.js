@@ -17,7 +17,7 @@ import multer from "multer";
 import cors from "cors";
 
 mongoose
-  .connect("mongodb+srv://webSiteDB:9173984Q@cluster0.zsqjr5h.mongodb.net/blog?retryWrites=true&w=majority")
+  .connect(process.env.MONGODB_URL)
   .then(() => console.log("DB OK"))
   .catch((err) => console.log("DB error", err));
 
