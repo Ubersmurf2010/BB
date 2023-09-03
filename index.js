@@ -23,11 +23,7 @@ mongoose
 
 const app = express();
 
-app.use(cors(
-  {
-    origin: "*"
-  }
-));
+app.use(cors());
 
 //make a vault for documents
 const storage = multer.diskStorage({
