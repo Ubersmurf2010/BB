@@ -25,7 +25,7 @@ const app = express();
 
 app.use(cors(
   {
-    origin: "*"
+    origin: "https://bb-gamma-three.vercel.app"
   }
 ));
 
