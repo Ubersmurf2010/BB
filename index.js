@@ -1,5 +1,3 @@
-//https://www.youtube.com/watch?v=GQ_pTmcXNrQ&t=480s
-
 import express from "express";
 import fs from "fs";
 import mongoose from "mongoose";
@@ -19,17 +17,12 @@ import multer from "multer";
 import cors from "cors";
 
 mongoose
-  .connect(
-    "mongodb+srv://webSiteDB:9173984Q@cluster0.zsqjr5h.mongodb.net/blog?retryWrites=true&w=majority"
-  )
+  .connect(process.env.MONGODB_URL)
   .then(() => console.log("DB OK"))
   .catch((err) => console.log("DB error", err));
 
-// создаем экспрес приложение
 const app = express();
-
 //make a vault for documents
-
 const storage = multer.diskStorage({
   destination: (_, __, cb) => {
     if (!fs.existsSync("uploads")) {
@@ -37,25 +30,15 @@ const storage = multer.diskStorage({
     }
     cb(null, "uploads");
   },
-
   filename: (_, file, cb) => {
     cb(null, file.originalname);
   },
 });
 
 const upload = multer({ storage });
-
 app.use(express.json());
-//делаешь гет запрос на получение статичного файла
+app.use(cors());
 app.use("/uploads", express.static("uploads"));
-
-app.use(
-  cors({
-    origin: [],
-    methods: ["POST", "GET"],
-    Credential: true,
-  })
-);
 
 app.post("/upload", checkAuth, upload.single("image"), (req, res) => {
   res.json({
@@ -77,6 +60,10 @@ app.post(
   userController.login
 );
 app.get("/auth/me", checkAuth, userController.getMe);
+
+app.get("/", (req, res) => {
+  res.json("Hello");
+});
 
 //posts apps
 app.post("/posts", checkAuth, postCreateValidator, postController.create);
@@ -101,7 +88,7 @@ app.patch("/cards/:id", checkAuth, cardController.update);
 app.get("/cards/", cardController.getAll);
 app.get("/cards/:id", cardController.getOne);
 
-app.listen(4444, (err) => {
+app.listen(80, (err) => {
   if (err) {
     return console.log(err);
   }
