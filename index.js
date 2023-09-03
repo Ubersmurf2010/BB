@@ -41,7 +41,7 @@ const upload = multer({ storage });
 app.use(express.json());
 app.use(cors(
   {
-    credentials: true
+    allowedHeaders: "*"
   }
 ));
 app.use("/uploads", express.static("uploads"));
