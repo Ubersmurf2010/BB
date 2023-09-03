@@ -22,7 +22,13 @@ mongoose
   .catch((err) => console.log("DB error", err));
 
 const app = express();
-app.use(cors());
+
+app.use(cors(
+  {
+    origin: "*"
+  }
+));
+
 //make a vault for documents
 const storage = multer.diskStorage({
   destination: (_, __, cb) => {
