@@ -68,7 +68,7 @@ app.get("/", (req, res) => {
 });
   
 //posts apps
-app.post("/post", checkAuth, postCreateValidator, postController.create);
+app.post("/posts", checkAuth, postCreateValidator, postController.create);
 app.delete("/posts/:id", checkAuth, postController.remove);
 app.patch("/posts/:id", checkAuth, postController.update);
 
