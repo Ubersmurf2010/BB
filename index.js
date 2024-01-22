@@ -90,7 +90,8 @@ app.patch("/cards/:id", checkAuth, cardController.update);
 app.get("/cards/", cardController.getAll);
 app.get("/cards/:id", cardController.getOne);
 
-app.listen(80, (err) => {
+//app.listen(80, (err) => {
+app.listen(4444, (err) => {
   if (err) {
     return console.log(err);
   }
