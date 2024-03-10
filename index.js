@@ -17,8 +17,7 @@ import multer from "multer";
 import cors from "cors";
 
 mongoose
-  //.connect(process.env.MONGODB_URL)
-  .connect("mongodb+srv://webSiteDB:9173984Q@cluster0.zsqjr5h.mongodb.net/blog?retryWrites=true&w=majority")
+  .connect(process.env.MONGODB_URL)
   .then(() => console.log("DB OK"))
   .catch((err) => console.log("DB error", err));
 
@@ -27,8 +26,8 @@ const app = express();
 //make a vault for documents
 const storage = multer.diskStorage({
   destination: (_, __, cb) => {
-    if (!fs.existsSync("uploads")) {
-      fs.mkdirSync("uploads");
+    if (!fs.existsSync("/uploads")) {
+      fs.mkdirSync("/uploads");
     }
     cb(null, "uploads");
   },
